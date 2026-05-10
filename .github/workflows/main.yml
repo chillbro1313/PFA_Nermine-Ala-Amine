@@ -27,8 +27,8 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-          source: "target/*.jar"
-          target: "/home/ubuntu/PFA_Nermine-Ala-Amine/target/"
+          source: "target/ecomback-0.0.1-SNAPSHOT.jar"
+          target: "/home/ubuntu/PFA_Nermine-Ala-Amine/"
           strip_components: 1
 
       - name: Deploy on EC2
@@ -39,7 +39,6 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             cd /home/ubuntu/PFA_Nermine-Ala-Amine
-            git pull origin master
             sudo docker-compose down
             sudo docker-compose up -d --build
             echo "✅ Deployed successfully!"
