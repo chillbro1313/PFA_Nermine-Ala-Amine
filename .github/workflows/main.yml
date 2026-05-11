@@ -24,6 +24,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: "target/ecomback-0.0.1-SNAPSHOT.jar"
           target: "/home/ubuntu/PFA_Nermine-Ala-Amine/"
+          overwrite: true
 
   deploy:
     needs: build
