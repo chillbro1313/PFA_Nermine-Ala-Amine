@@ -24,8 +24,10 @@ services:
       SPRING_DATASOURCE_PASSWORD: root
     restart: on-failure
 
-  frontend:
+frontend:
     build: ./frontend
     container_name: frontend-container
     ports:
       - "3000:80"
+    depends_on:
+      - app

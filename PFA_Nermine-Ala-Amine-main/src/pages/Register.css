@@ -1,0 +1,62 @@
+/* Register page specific styles */
+
+.register-card {
+    max-width: 460px;
+}
+
+.register-icon {
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+}
+
+.register-submit {
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+}
+
+.register-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.register-link {
+    color: var(--accent) !important;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.register-link:hover {
+    color: var(--accent-hover) !important;
+    text-decoration: underline;
+}
+
+.login-link {
+    color: var(--accent) !important;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.login-link:hover {
+    color: var(--accent-hover) !important;
+    text-decoration: underline;
+}
+
+/* Third background shape for register page */
+.shape-3 {
+    width: 250px;
+    height: 250px;
+    background-color: #8b5cf6;
+    top: 50%;
+    right: -80px;
+    transform: translateY(-50%);
+}
+
+/* Password strength indicator visual cue */
+.form-group-with-icon input:focus {
+    border-color: var(--accent);
+}
+
+/* Smooth transition for error messages */
+.alert-danger {
+    animation: fadeIn 0.3s ease forwards;
+}
