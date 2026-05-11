@@ -16,6 +16,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           command_timeout: 30m
           script: |
+            git config --global --add safe.directory /home/ubuntu/PFA_Nermine-Ala-Amine
             cd /home/ubuntu/PFA_Nermine-Ala-Amine
             git pull origin master
             export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
