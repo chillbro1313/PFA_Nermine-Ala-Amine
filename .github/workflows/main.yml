@@ -5,7 +5,28 @@ on:
     branches: [master]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build JAR
+        run: ./mvnw package -DskipTests
+      - name: Copy JAR to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "target/ecomback-0.0.1-SNAPSHOT.jar"
+          target: "/home/ubuntu/PFA_Nermine-Ala-Amine/"
+
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy on EC2
@@ -14,14 +35,9 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-          command_timeout: 30m
+          command_timeout: 10m
           script: |
-            git config --global --add safe.directory /home/ubuntu/PFA_Nermine-Ala-Amine
             cd /home/ubuntu/PFA_Nermine-Ala-Amine
-            git pull origin master
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-            export PATH=$JAVA_HOME/bin:$PATH
-            ./mvnw package -DskipTests
             sudo docker build -t ecomback:1.0 .
             sudo docker-compose down
             sudo docker-compose up -d
